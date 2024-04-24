@@ -2,12 +2,10 @@ import cv2
 import os
 import time
 
-
 # Функція для створення папки
 def create_folder_if_not_exists(folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
-
 
 # Функція для отримання кількості кадрів і FPS з відео
 def get_video_info(video_path):
@@ -17,8 +15,6 @@ def get_video_info(video_path):
     cam.release()
     return total_frames, fps
 
-
-''' Sequential '''
 # Функція для обробки одного відео
 def extract_frames(video_path, output_folder_path):
     total_frames, fps = get_video_info(video_path)
@@ -39,12 +35,10 @@ def extract_frames(video_path, output_folder_path):
     cam.release()
     cv2.destroyAllWindows()
 
-    print(f"sequential frames extracted and saved to {output_folder_path}")
+    print(f"Frames extracted and saved to {output_folder_path}")
 
-
-''' Sequential '''
 # Функція для обробки всіх відео в папці
-def process_video_folder_sequentially(videos_folder_path, output_images_folder_path):
+def process_video_folder(videos_folder_path, output_images_folder_path):
     try:
         # Цикл для обробки кожного відео у папці
         for video_file_name in os.listdir(videos_folder_path):
@@ -56,21 +50,17 @@ def process_video_folder_sequentially(videos_folder_path, output_images_folder_p
     except Exception as e:
         print(f"Error processing video: {e}")
 
-
 # Шлях до папки з відео
 videos_folder_path = "data/video/"
-
-
-''' Sequential '''
 # Шлях до папки для зображень
-output_images_folder_path_sequential = "data/image/sequential/"
+output_images_folder_path = "data/image/"
 
 # Засікаємо початок виконання програми
-start_time_sequential = time.time()
+start_time = time.time()
 
-process_video_folder_sequentially(videos_folder_path, output_images_folder_path_sequential)
+process_video_folder(videos_folder_path, output_images_folder_path)
 
 # Засікаємо кінець виконання програми
-end_time_sequential = time.time()
-execution_time_sequential = end_time_sequential - start_time_sequential
-print(f"Total sequential execution time: {execution_time_sequential} seconds")
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Total execution time: {execution_time} seconds")
